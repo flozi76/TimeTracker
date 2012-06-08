@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\Drawable\disc.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TimeTracker.Core\TimeTracker.Core.csproj">

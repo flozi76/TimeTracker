@@ -9,7 +9,7 @@ namespace TimeTracker.Core.Geo
         /// <summary>
         /// Latitude in degrees. -90 to 90
         /// </summary>
-        public Double Latitude
+        public double Latitude
         {
             get { return this.latitude; }
             set
@@ -23,7 +23,7 @@ namespace TimeTracker.Core.Geo
         /// <summary>
         /// Longitude in degree. -180 to 180
         /// </summary>
-        public Double Longitude
+        public double Longitude
         {
             get { return this.longitude; }
             set

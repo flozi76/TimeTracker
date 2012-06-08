@@ -27,7 +27,10 @@ namespace TimeTracker
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int disc = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Icon = 2130837505;
 			
 			private Drawable()
 			{
@@ -37,14 +40,17 @@ namespace TimeTracker
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050002
-			public const int ListLocations = 2131034114;
+			// aapt resource value: 0x7f050003
+			public const int ListLocations = 2131034115;
 			
-			// aapt resource value: 0x7f050001
-			public const int TextLocation = 2131034113;
+			// aapt resource value: 0x7f050002
+			public const int TextLocation = 2131034114;
 			
 			// aapt resource value: 0x7f050000
-			public const int buttonToDatabase = 2131034112;
+			public const int btnReadEntries = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int btnTrackcCurrentLocation = 2131034113;
 			
 			private Id()
 			{

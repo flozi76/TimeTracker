@@ -2,7 +2,7 @@ using System;
 
 namespace TimeTracker.Core.Geo
 {
-    public enum UnitsOfLength { Mile, NauticalMiles, Kilometer }
+    public enum UnitsOfLength { Mile, NauticalMiles, Kilometer, Meter }
     public enum CardinalPoints { N, E, W, S, Ne, Nw, Se, Sw }
 
 
@@ -18,7 +18,7 @@ namespace TimeTracker.Core.Geo
         /// <param name="coordinate1">First coordinate.</param>
         /// <param name="coordinate2">Second coordinate.</param>
         /// <param name="unitsOfLength">Sets the return value unit of length.</param>
-        public static Double Distance(Coordinate coordinate1, Coordinate coordinate2, UnitsOfLength unitsOfLength)
+        public Double Distance(Coordinate coordinate1, Coordinate coordinate2, UnitsOfLength unitsOfLength)
         {
 
             var theta = coordinate1.Longitude - coordinate2.Longitude;
@@ -34,6 +34,8 @@ namespace TimeTracker.Core.Geo
                 distance = distance * MilesToKilometers;
             else if (unitsOfLength == UnitsOfLength.NauticalMiles)
                 distance = distance * MilesToNautical;
+            else if (unitsOfLength == UnitsOfLength.Meter)
+                distance = distance * MilesToKilometers * 1000;
 
             return (distance);
 

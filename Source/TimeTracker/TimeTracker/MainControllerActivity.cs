@@ -10,6 +10,7 @@ namespace TimeTracker
 {
     using Android.Locations;
     using TimeTracker.Core.BusinessLayer;
+    using TimeTracker.Core.Geo;
 
     [Activity(Label = "TimeTracker", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainControllerActivity : Activity, ILocationListener
@@ -18,9 +19,11 @@ namespace TimeTracker
         private LocationManager locationManager;
         private StringBuilder stringBuilder;
         private Geocoder geocoder;
-        private Button addButton;
+        private Button readEntriesButton;
         private TextView listLocationsText;
         private TrackLocation currentLocation;
+        private DistanceCalculator distanceCalculator;
+        private Button addCurrentLocationButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -30,9 +33,11 @@ namespace TimeTracker
 
             this.locationText = FindViewById<TextView>(Resource.Id.TextLocation);
             this.listLocationsText = FindViewById<TextView>(Resource.Id.ListLocations);
-            this.addButton = FindViewById<Button>(Resource.Id.buttonToDatabase);
+            this.readEntriesButton = FindViewById<Button>(Resource.Id.btnReadEntries);
+            this.addCurrentLocationButton = FindViewById<Button>(Resource.Id.btnTrackcCurrentLocation);
+            this.distanceCalculator = new DistanceCalculator();
 
-            this.addButton.Click += delegate
+            this.readEntriesButton.Click += delegate
                                         {
                                             var tasks = TrackLocationManager.Instance.GetTrackLocations();
                                             var stringBuilderList = new StringBuilder();
@@ -43,8 +48,15 @@ namespace TimeTracker
                                             }
 
                                             this.listLocationsText.Text = stringBuilderList.ToString();
-
                                         };
+
+            this.addCurrentLocationButton.Click += delegate
+                                                       {
+                                                           if (this.currentLocation != null)
+                                                           {
+                                                               TrackLocationManager.Instance.SaveCurrentLocation(this.currentLocation);
+                                                           }
+                                                       };
 
             this.stringBuilder = new StringBuilder();
             this.geocoder = new Geocoder(this);
@@ -62,16 +74,26 @@ namespace TimeTracker
 
             if (lastKnownLocation != null)
             {
-                this.locationText.Text = string.Format("Last known location, lat: {0}, long: {1}", lastKnownLocation.Latitude, lastKnownLocation.Longitude);
+                this.currentLocation = new TrackLocation { Latitude = lastKnownLocation.Latitude, Longitude = lastKnownLocation.Longitude };
+                this.stringBuilder.AppendLine(string.Format("Last known location, lat: {0}, long: {1}", lastKnownLocation.Latitude, lastKnownLocation.Longitude));
+                this.UpdateAddress();
+                this.locationText.Text = this.stringBuilder.ToString();
             }
 
-            this.locationManager.RequestLocationUpdates(bestProvider, 1000, 30, this);
+            this.locationManager.RequestLocationUpdates(bestProvider, 1000, 1, this);
         }
 
         public void OnLocationChanged(Location location)
         {
-            this.stringBuilder.AppendLine(string.Format("Location updated, lat: {0}, long: {1}", location.Latitude, location.Longitude)
-            );
+            this.stringBuilder.AppendLine(string.Format("Location updated, lat: {0}, long: {1}", location.Latitude, location.Longitude));
+
+            if (this.currentLocation != null)
+            {
+                var newCoordinate = new Coordinate { Latitude = location.Latitude, Longitude = location.Longitude };
+                var lastCoordinate = new Coordinate { Latitude = this.currentLocation.Latitude, Longitude = this.currentLocation.Longitude };
+                var distance = this.distanceCalculator.Distance(lastCoordinate, newCoordinate, UnitsOfLength.Meter);
+                this.stringBuilder.AppendLine(string.Format("Distance to last coordinate: {0}", distance));
+            }
 
             this.currentLocation = new TrackLocation
             {
@@ -79,9 +101,16 @@ namespace TimeTracker
                 Latitude = location.Latitude
             };
 
+            this.UpdateAddress();
+
+            this.locationText.Text = this.stringBuilder.ToString();
+        }
+
+        private void UpdateAddress()
+        {
             try
             {
-                Address address = this.geocoder.GetFromLocation(location.Latitude, location.Longitude, 1).FirstOrDefault();
+                Address address = this.geocoder.GetFromLocation(this.currentLocation.Latitude, this.currentLocation.Longitude, 1).FirstOrDefault();
 
                 if (address != null)
                 {
@@ -95,15 +124,11 @@ namespace TimeTracker
                     this.currentLocation.HouseNumber = address.FeatureName;
                     this.currentLocation.Street = address.Thoroughfare;
                 }
-
-                TrackLocationManager.Instance.SaveCurrentLocation(this.currentLocation);
             }
             catch (IOException io)
             {
                 Android.Util.Log.Debug("LocationActivity", io.Message);
             }
-
-            this.locationText.Text = this.stringBuilder.ToString();
         }
 
         public void OnProviderDisabled(string provider)

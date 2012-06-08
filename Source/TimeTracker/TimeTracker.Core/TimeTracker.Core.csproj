@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLayer\TrackLocation.cs" />
-    <Compile Include="BusinessLayer\TrackLocationManager.cs" />
+    <Compile Include="Domain\TrackLocation.cs" />
+    <Compile Include="Domain\TrackLocationManager.cs" />
     <Compile Include="Database\SQLite\AutoIncrementAttribute.cs" />
     <Compile Include="Database\SQLite\CollationAttribute.cs" />
     <Compile Include="Database\SQLite\IgnoreAttribute.cs" />
@@ -60,6 +60,7 @@
     <Compile Include="Database\TrackLocationsDatabase.cs" />
     <Compile Include="Geo\Coordinate.cs" />
     <Compile Include="Geo\DistanceCalculator.cs" />
+    <Compile Include="Geo\Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
