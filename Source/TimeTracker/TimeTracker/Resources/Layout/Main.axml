@@ -3,6 +3,11 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <Button
+        android:text="Write Location to database"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonToDatabase" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="fill_parent"
