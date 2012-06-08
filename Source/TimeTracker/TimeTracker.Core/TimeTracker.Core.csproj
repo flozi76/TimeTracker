@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>4681c945-7356-4e3c-b4e7-c5ab816f006e</ProjectGuid>
+    <ProjectGuid>{49B903B5-151E-4F85-ADEC-421623643C52}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -39,7 +39,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BusinessLayer\Task.cs" />
+    <Compile Include="BusinessLayer\TaskManager.cs" />
+    <Compile Include="Database\AutoIncrementAttribute.cs" />
+    <Compile Include="Database\CollationAttribute.cs" />
+    <Compile Include="Database\IgnoreAttribute.cs" />
+    <Compile Include="Database\IndexedAttribute.cs" />
+    <Compile Include="Database\MaxLengthAttribute.cs" />
+    <Compile Include="Database\Orm.cs" />
+    <Compile Include="Database\PreparedSqlLiteInsertCommand.cs" />
+    <Compile Include="Database\PrimaryKeyAttribute.cs" />
+    <Compile Include="Database\SQLiteConnection.cs" />
+    <Compile Include="Database\SQLite3.cs" />
+    <Compile Include="Database\SQLiteCommand.cs" />
+    <Compile Include="Database\SQLiteException.cs" />
+    <Compile Include="Database\TableInfo.cs" />
+    <Compile Include="Database\TableMapping.cs" />
+    <Compile Include="Database\TableQuery.cs" />
+    <Compile Include="Database\TaskDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
