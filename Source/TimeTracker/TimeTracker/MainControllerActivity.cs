@@ -9,14 +9,18 @@ using Java.IO;
 namespace TimeTracker
 {
     using Android.Locations;
+    using TimeTracker.Core.BusinessLayer;
 
     [Activity(Label = "TimeTracker", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainControllerActivity : Activity, ILocationListener
     {
-        private TextView _locationText;
-        private LocationManager _locationManager;
-        private StringBuilder _builder;
-        private Geocoder _geocoder;
+        private TextView locationText;
+        private LocationManager locationManager;
+        private StringBuilder stringBuilder;
+        private Geocoder geocoder;
+        private Button addButton;
+        private TextView listLocationsText;
+        private TrackLocation currentLocation;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -24,52 +28,82 @@ namespace TimeTracker
 
             SetContentView(Resource.Layout.Main);
 
-            _builder = new StringBuilder();
-            _geocoder = new Geocoder(this);
-            _locationText = FindViewById<TextView>(Resource.Id.TextLocation);
-            _locationManager = (LocationManager)GetSystemService(LocationService);
+            this.locationText = FindViewById<TextView>(Resource.Id.TextLocation);
+            this.listLocationsText = FindViewById<TextView>(Resource.Id.ListLocations);
+            this.addButton = FindViewById<Button>(Resource.Id.buttonToDatabase);
+
+            this.addButton.Click += delegate
+                                        {
+                                            var tasks = TrackLocationManager.Instance.GetTrackLocations();
+                                            var stringBuilderList = new StringBuilder();
+                                            foreach (var trackLocation in tasks)
+                                            {
+                                                stringBuilderList.AppendLine(string.Format("{0} {1} {2} {3} {4}", trackLocation.ID, trackLocation.PostalCode, trackLocation.City, trackLocation.Street, trackLocation.HouseNumber));
+                                                stringBuilderList.AppendLine(string.Format("Lat: {0} Lon: {1}", trackLocation.Latitude, trackLocation.Longitude));
+                                            }
+
+                                            this.listLocationsText.Text = stringBuilderList.ToString();
+
+                                        };
+
+            this.stringBuilder = new StringBuilder();
+            this.geocoder = new Geocoder(this);
+            this.locationManager = (LocationManager)GetSystemService(LocationService);
+
 
             var criteria = new Criteria
                                {
                                    Accuracy = Accuracy.Coarse,
                                    PowerRequirement = Power.Low,
                                };
-            string bestProvider = _locationManager.GetBestProvider(criteria, true);
+            string bestProvider = this.locationManager.GetBestProvider(criteria, true);
 
-            Location lastKnownLocation = _locationManager.GetLastKnownLocation(bestProvider);
+            Location lastKnownLocation = this.locationManager.GetLastKnownLocation(bestProvider);
 
             if (lastKnownLocation != null)
             {
-                _locationText.Text = string.Format("Last known location, lat: {0}, long: {1}",
-                                                   lastKnownLocation.Latitude, lastKnownLocation.Longitude);
+                this.locationText.Text = string.Format("Last known location, lat: {0}, long: {1}", lastKnownLocation.Latitude, lastKnownLocation.Longitude);
             }
 
-            _locationManager.RequestLocationUpdates(bestProvider, 1000, 30, this);
+            this.locationManager.RequestLocationUpdates(bestProvider, 1000, 30, this);
         }
 
         public void OnLocationChanged(Location location)
         {
-            _builder.AppendLine(string.Format("Location updated, lat: {0}, long: {1}", location.Latitude, location.Longitude)
+            this.stringBuilder.AppendLine(string.Format("Location updated, lat: {0}, long: {1}", location.Latitude, location.Longitude)
             );
+
+            this.currentLocation = new TrackLocation
+            {
+                Longitude = location.Longitude,
+                Latitude = location.Latitude
+            };
 
             try
             {
-                Address address = _geocoder.GetFromLocation(location.Latitude, location.Longitude, 1).FirstOrDefault();
+                Address address = this.geocoder.GetFromLocation(location.Latitude, location.Longitude, 1).FirstOrDefault();
 
                 if (address != null)
                 {
-                    _builder.AppendLine(string.Format("Country: {0}-{1}", address.CountryCode, address.CountryName));
-                    _builder.AppendLine(string.Format("City: {0}-{1}", address.PostalCode, address.Locality));
-                    _builder.AppendLine(string.Format("Street: {0}-{1}", address.Thoroughfare, address.FeatureName));
+                    this.stringBuilder.AppendLine(string.Format("Country: {0}-{1}", address.CountryCode, address.CountryName));
+                    this.stringBuilder.AppendLine(string.Format("City: {0}-{1}", address.PostalCode, address.Locality));
+                    this.stringBuilder.AppendLine(string.Format("Street: {0}-{1}", address.Thoroughfare, address.FeatureName));
 
+                    this.currentLocation.City = address.Locality;
+                    this.currentLocation.PostalCode = address.PostalCode;
+                    this.currentLocation.Country = address.CountryName;
+                    this.currentLocation.HouseNumber = address.FeatureName;
+                    this.currentLocation.Street = address.Thoroughfare;
                 }
+
+                TrackLocationManager.Instance.SaveCurrentLocation(this.currentLocation);
             }
             catch (IOException io)
             {
                 Android.Util.Log.Debug("LocationActivity", io.Message);
             }
 
-            _locationText.Text = _builder.ToString();
+            this.locationText.Text = this.stringBuilder.ToString();
         }
 
         public void OnProviderDisabled(string provider)

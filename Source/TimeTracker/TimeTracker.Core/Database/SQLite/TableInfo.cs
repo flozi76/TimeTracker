@@ -1,5 +1,5 @@
 ﻿
-namespace TimeTracker.Core.Database
+namespace TimeTracker.Core.Database.SQLite
 {
     class TableInfo
     {

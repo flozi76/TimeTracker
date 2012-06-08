@@ -1,4 +1,4 @@
-namespace TimeTracker.Core.Database
+namespace TimeTracker.Core.Database.SQLite
 {
     using System;
     using System.Collections.Generic;

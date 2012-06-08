@@ -37,14 +37,14 @@ namespace TimeTracker
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int Provider = 2131034113;
-			
 			// aapt resource value: 0x7f050002
-			public const int Status = 2131034114;
+			public const int ListLocations = 2131034114;
+			
+			// aapt resource value: 0x7f050001
+			public const int TextLocation = 2131034113;
 			
 			// aapt resource value: 0x7f050000
-			public const int TextLocation = 2131034112;
+			public const int buttonToDatabase = 2131034112;
 			
 			private Id()
 			{

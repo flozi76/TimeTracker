@@ -1,4 +1,4 @@
-namespace TimeTracker.Core.Database
+namespace TimeTracker.Core.Database.SQLite
 {
     public class SQLiteException : System.Exception
     {

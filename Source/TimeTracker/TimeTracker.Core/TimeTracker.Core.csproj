@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -39,24 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLayer\Task.cs" />
-    <Compile Include="BusinessLayer\TaskManager.cs" />
-    <Compile Include="Database\AutoIncrementAttribute.cs" />
-    <Compile Include="Database\CollationAttribute.cs" />
-    <Compile Include="Database\IgnoreAttribute.cs" />
-    <Compile Include="Database\IndexedAttribute.cs" />
-    <Compile Include="Database\MaxLengthAttribute.cs" />
-    <Compile Include="Database\Orm.cs" />
-    <Compile Include="Database\PreparedSqlLiteInsertCommand.cs" />
-    <Compile Include="Database\PrimaryKeyAttribute.cs" />
-    <Compile Include="Database\SQLiteConnection.cs" />
-    <Compile Include="Database\SQLite3.cs" />
-    <Compile Include="Database\SQLiteCommand.cs" />
-    <Compile Include="Database\SQLiteException.cs" />
-    <Compile Include="Database\TableInfo.cs" />
-    <Compile Include="Database\TableMapping.cs" />
-    <Compile Include="Database\TableQuery.cs" />
-    <Compile Include="Database\TaskDatabase.cs" />
+    <Compile Include="BusinessLayer\TrackLocation.cs" />
+    <Compile Include="BusinessLayer\TrackLocationManager.cs" />
+    <Compile Include="Database\SQLite\AutoIncrementAttribute.cs" />
+    <Compile Include="Database\SQLite\CollationAttribute.cs" />
+    <Compile Include="Database\SQLite\IgnoreAttribute.cs" />
+    <Compile Include="Database\SQLite\IndexedAttribute.cs" />
+    <Compile Include="Database\SQLite\MaxLengthAttribute.cs" />
+    <Compile Include="Database\SQLite\Orm.cs" />
+    <Compile Include="Database\SQLite\PreparedSqlLiteInsertCommand.cs" />
+    <Compile Include="Database\SQLite\PrimaryKeyAttribute.cs" />
+    <Compile Include="Database\SQLite\SQLiteConnection.cs" />
+    <Compile Include="Database\SQLite\SQLite3.cs" />
+    <Compile Include="Database\SQLite\SQLiteCommand.cs" />
+    <Compile Include="Database\SQLite\SQLiteException.cs" />
+    <Compile Include="Database\SQLite\TableInfo.cs" />
+    <Compile Include="Database\SQLite\TableMapping.cs" />
+    <Compile Include="Database\SQLite\TableQuery.cs" />
+    <Compile Include="Database\TrackLocationsDatabase.cs" />
+    <Compile Include="Geo\Coordinate.cs" />
+    <Compile Include="Geo\DistanceCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
