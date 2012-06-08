@@ -29,7 +29,11 @@ namespace TimeTracker
             _locationText = FindViewById<TextView>(Resource.Id.TextLocation);
             _locationManager = (LocationManager)GetSystemService(LocationService);
 
-            var criteria = new Criteria() { Accuracy = Accuracy.NoRequirement };
+            var criteria = new Criteria
+                               {
+                                   Accuracy = Accuracy.Coarse,
+                                   PowerRequirement = Power.Low,
+                               };
             string bestProvider = _locationManager.GetBestProvider(criteria, true);
 
             Location lastKnownLocation = _locationManager.GetLastKnownLocation(bestProvider);
@@ -40,26 +44,24 @@ namespace TimeTracker
                                                    lastKnownLocation.Latitude, lastKnownLocation.Longitude);
             }
 
-            _locationManager.RequestLocationUpdates(bestProvider, 5000, 2, this);
+            _locationManager.RequestLocationUpdates(bestProvider, 1000, 30, this);
         }
 
         public void OnLocationChanged(Location location)
         {
-            _builder.AppendLine(
-                string.Format("Location updated, lat: {0}, long: {1}",
-                              location.Latitude, location.Longitude)
+            _builder.AppendLine(string.Format("Location updated, lat: {0}, long: {1}", location.Latitude, location.Longitude)
             );
 
             try
             {
-                Address address =
-                    _geocoder
-                        .GetFromLocation(location.Latitude, location.Longitude, 1)
-                        .FirstOrDefault();
+                Address address = _geocoder.GetFromLocation(location.Latitude, location.Longitude, 1).FirstOrDefault();
 
                 if (address != null)
                 {
-                    _builder.AppendLine(" -> " + address.CountryName);
+                    _builder.AppendLine(string.Format("Country: {0}-{1}", address.CountryCode, address.CountryName));
+                    _builder.AppendLine(string.Format("City: {0}-{1}", address.PostalCode, address.Locality));
+                    _builder.AppendLine(string.Format("Street: {0}-{1}", address.Thoroughfare, address.FeatureName));
+
                 }
             }
             catch (IOException io)
