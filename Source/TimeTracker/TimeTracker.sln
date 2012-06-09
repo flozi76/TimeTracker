@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker", "TimeTracker\TimeTracker.csproj", "{1F90840B-B6B8-4795-B9E3-5D21ADAC719E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.Test", "TimeTracker.Test\TimeTracker.Test.csproj", "{F45B9133-3C55-46A6-BCEF-1DDBA11DC10C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.Core", "TimeTracker.Core\TimeTracker.Core.csproj", "{49B903B5-151E-4F85-ADEC-421623643C52}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{1F90840B-B6B8-4795-B9E3-5D21ADAC719E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F90840B-B6B8-4795-B9E3-5D21ADAC719E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F90840B-B6B8-4795-B9E3-5D21ADAC719E}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{F45B9133-3C55-46A6-BCEF-1DDBA11DC10C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F45B9133-3C55-46A6-BCEF-1DDBA11DC10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F45B9133-3C55-46A6-BCEF-1DDBA11DC10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F45B9133-3C55-46A6-BCEF-1DDBA11DC10C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49B903B5-151E-4F85-ADEC-421623643C52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49B903B5-151E-4F85-ADEC-421623643C52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49B903B5-151E-4F85-ADEC-421623643C52}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -14,7 +14,7 @@ namespace TimeTracker.Core.Database
     public class TrackLocationsDatabase : SQLiteConnection
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tasky.DL.TaskDatabase"/> TrackLocationsDatabase. 
+        /// Initializes a new instance of the <see cref="TrackLocationy.DL.TrackLocationDatabase"/> TrackLocationsDatabase. 
         /// if the database doesn't exist, it will create the database and all the tables.
         /// </summary>
         /// <param name='path'>

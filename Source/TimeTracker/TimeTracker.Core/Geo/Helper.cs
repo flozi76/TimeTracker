@@ -3,6 +3,7 @@ using System;
 namespace TimeTracker.Core.Geo
 {
     using System.Collections.Generic;
+    using Android.Locations;
 
     public static class Helper
     {
@@ -66,8 +67,16 @@ namespace TimeTracker.Core.Geo
 
 
             return cardinalRanges.Find(p => (degree >= p.LowRange && degree < p.HighRange)).CardinalPoint;
+        }
 
-
+        /// <summary>
+        /// Toes the coordinate.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <returns>Coordinates for the location</returns>
+        public static Coordinate ToCoordinate(this Location location)
+        {
+            return new Coordinate { Longitude = location.Longitude, Latitude = location.Latitude };
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace TimeTracker.Core.BusinessLayer
         private TrackLocationManager()
         {
             // set the db location
-            //databaseLocation = Path.Combine (NSBundle.MainBundle.BundlePath, "Library/TaskDB.db3");
+            //databaseLocation = Path.Combine (NSBundle.MainBundle.BundlePath, "Library/TrackLocationDB.db3");
             this.databaseLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "LocationsDb.db3");
 
             // instantiate the database	
@@ -41,7 +41,7 @@ namespace TimeTracker.Core.BusinessLayer
             return database.SaveLocation(item);
         }
 
-        public int DeleteTask(int id)
+        public int DeleteTrackLocation(int id)
         {
             return database.DeleteLocation(id);
         }

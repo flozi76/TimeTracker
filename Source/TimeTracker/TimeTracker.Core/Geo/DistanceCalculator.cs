@@ -6,7 +6,7 @@ namespace TimeTracker.Core.Geo
     public enum CardinalPoints { N, E, W, S, Ne, Nw, Se, Sw }
 
 
-    public class DistanceCalculator
+    public class DistanceCalculator : IDistanceCalculator
     {
         private const Double MilesToKilometers = 1.609344;
         private const Double MilesToNautical = 0.8684;

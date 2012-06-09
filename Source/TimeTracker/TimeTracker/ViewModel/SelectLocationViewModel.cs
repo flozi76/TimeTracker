@@ -1,18 +1,34 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace TimeTracker.ViewModel
 {
-    public class SelectLocationViewModel
+    using TimeTracker.Core.BusinessLayer;
+    using TimeTracker.Core.Domain;
+
+    public class SelectLocationViewModel : ISelectLocationViewModel
     {
+        private readonly ICoreApplicationContext coreApplicationContext;
+
+        public SelectLocationViewModel(ICoreApplicationContext coreApplicationContext)
+        {
+            this.coreApplicationContext = coreApplicationContext;
+        }
+
+        IList<TrackLocation> ISelectLocationViewModel.ResolveCurrentLocations()
+        {
+            IList<TrackLocation> locations = new List<TrackLocation>();
+
+            locations.Add(this.coreApplicationContext.GetCurrentTrackLocation());
+
+            for (int i = 0; i < 10; i++)
+            {
+                locations.Add(new TrackLocation
+                                  {
+                                      Name = string.Format("location: {0}", i)
+                                  });
+            }
+
+            return locations;
+        }
     }
 }

@@ -2,18 +2,21 @@
 namespace TimeTracker.Test
 {
     using System;
-    using Xunit;
+    using NUnit.Framework;
 
-    public class GravitySensorServiceFixture : IDisposable
+    [TestFixture]
+    public class GravitySensorServiceFixture
     {
-        [Fact]
+
+        [SetUp]
+        public void Setup()
+        {
+        }
+
+        [Test]
         public void SomeTest()
         {
             Console.WriteLine("Some Test????");
-        }
-
-        public void Dispose()
-        {
         }
     }
 }
