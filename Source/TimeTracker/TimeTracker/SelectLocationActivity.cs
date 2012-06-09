@@ -6,6 +6,7 @@ namespace TimeTracker
     using System.Collections.Generic;
     using System.Linq;
     using Android.App;
+    using Android.Content;
     using Android.Locations;
     using Android.OS;
     using Android.Widget;
@@ -29,8 +30,6 @@ namespace TimeTracker
             SetContentView(Resource.Layout.SelectLocation);
             var locationManager = (LocationManager)this.GetSystemService(LocationService);
             var geoCoder = new Geocoder(this);
-
-
             this.listView = this.FindViewById<ListView>(Resource.Id.listViewSelectLocations);
 
             try
@@ -43,6 +42,17 @@ namespace TimeTracker
 
                 this.listView.Adapter = new TrackLocationListAdapter(this, currentLocations);
                 this.listView.TextFilterEnabled = true;
+
+                this.listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                {
+                    var backToMain = new Intent(this, typeof(MainActivity));
+                    //backToMain.PutExtra("TaskID", this._tasks[e.Position].ID);
+                    var item = currentLocations[e.Position];
+
+                    CentralStation.Instance.Ainject.ResolveType<ITrackLocationManager>().SaveCurrentLocation(item);
+
+                    this.StartActivity(backToMain);
+                };
             }
             catch (Exception ex)
             {

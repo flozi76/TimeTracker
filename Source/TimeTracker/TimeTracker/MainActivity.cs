@@ -11,13 +11,13 @@ namespace TimeTracker
     using Android.Content;
     using Android.Locations;
     using TimeTracker.Core.BusinessLayer;
+    using TimeTracker.Core.Domain;
     using TimeTracker.Core.Geo;
 
     [Activity(Label = "TimeTracker", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private Button addCurrentLocationButton;
-        private Button readEntriesButton;
         private TextView listLocationsText;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -27,21 +27,17 @@ namespace TimeTracker
             SetContentView(Resource.Layout.Main);
 
             this.listLocationsText = FindViewById<TextView>(Resource.Id.ListLocations);
-            this.readEntriesButton = FindViewById<Button>(Resource.Id.btnReadEntries);
             this.addCurrentLocationButton = FindViewById<Button>(Resource.Id.btnTrackcCurrentLocation);
 
-            this.readEntriesButton.Click += delegate
-                                        {
-                                            var TrackLocations = TrackLocationManager.Instance.GetTrackLocations();
-                                            var stringBuilderList = new StringBuilder();
-                                            foreach (var trackLocation in TrackLocations)
-                                            {
-                                                stringBuilderList.AppendLine(string.Format("{0} {1} {2} {3} {4}", trackLocation.ID, trackLocation.PostalCode, trackLocation.City, trackLocation.Street, trackLocation.HouseNumber));
-                                                stringBuilderList.AppendLine(string.Format("Lat: {0} Lon: {1}", trackLocation.Latitude, trackLocation.Longitude));
-                                            }
+            var trackLocations = CentralStation.Instance.Ainject.ResolveType<ITrackLocationManager>().GetTrackLocations();
+            var stringBuilderList = new StringBuilder();
+            foreach (var trackLocation in trackLocations)
+            {
+                stringBuilderList.AppendLine(string.Format("{0} {1} {2} {3} {4}", trackLocation.ID, trackLocation.PostalCode, trackLocation.City, trackLocation.Street, trackLocation.HouseNumber));
+                stringBuilderList.AppendLine(string.Format("Lat: {0} Lon: {1}", trackLocation.Latitude, trackLocation.Longitude));
+            }
 
-                                            this.listLocationsText.Text = stringBuilderList.ToString();
-                                        };
+            this.listLocationsText.Text = stringBuilderList.ToString();
 
             this.addCurrentLocationButton.Click += delegate
                                                        {

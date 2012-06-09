@@ -1,49 +1,44 @@
-namespace TimeTracker.Core.BusinessLayer
+namespace TimeTracker.Core.Domain
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using TimeTracker.Core.BusinessLayer;
     using TimeTracker.Core.Database;
 
-    public class TrackLocationManager
+    public class TrackLocationManager : ITrackLocationManager
     {
         private readonly TrackLocationsDatabase database;
         private readonly string databaseLocation;
-        private static TrackLocationManager trackLocationManager;
 
-        private TrackLocationManager()
+        public TrackLocationManager()
         {
             // set the db location
             //databaseLocation = Path.Combine (NSBundle.MainBundle.BundlePath, "Library/TrackLocationDB.db3");
             this.databaseLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "LocationsDb.db3");
 
             // instantiate the database	
-            this.database = new TrackLocationsDatabase(databaseLocation);
-        }
-
-        public static TrackLocationManager Instance
-        {
-            get { return trackLocationManager ?? (trackLocationManager = new TrackLocationManager()); }
+            this.database = new TrackLocationsDatabase(this.databaseLocation);
         }
 
         public TrackLocation GetLocation(int id)
         {
-            return database.GetLocation(id);
+            return this.database.GetLocation(id);
         }
 
         public IEnumerable<TrackLocation> GetTrackLocations()
         {
-            return database.GetLocations();
+            return this.database.GetLocations();
         }
 
         public int SaveCurrentLocation(TrackLocation item)
         {
-            return database.SaveLocation(item);
+            return this.database.SaveLocation(item);
         }
 
         public int DeleteTrackLocation(int id)
         {
-            return database.DeleteLocation(id);
+            return this.database.DeleteLocation(id);
         }
     }
 }

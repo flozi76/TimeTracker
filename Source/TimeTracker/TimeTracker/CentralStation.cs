@@ -52,6 +52,7 @@ namespace TimeTracker
 
                 this.ainject.RegisterType(() => coreApplicationContext);
                 this.ainject.RegisterType<IDistanceCalculator>(() => new DistanceCalculator());
+                this.ainject.RegisterType<ITrackLocationManager>(() => new TrackLocationManager());
 
                 // Register ViewModels
                 this.ainject.RegisterType<ISelectLocationViewModel>(() => new SelectLocationViewModel(this.ainject.ResolveType<ICoreApplicationContext>()));

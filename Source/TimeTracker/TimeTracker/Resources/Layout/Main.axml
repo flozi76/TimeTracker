@@ -4,12 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <Button
-        android:text="Read database"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnReadEntries"
-        android:layout_marginRight="0.0dp" />
-    <Button
         android:text="Track current location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
