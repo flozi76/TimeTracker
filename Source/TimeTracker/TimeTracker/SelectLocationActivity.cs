@@ -35,11 +35,10 @@ namespace TimeTracker
 
             try
             {
-                var centralStationInstance = new CentralStation();
-                this.coreApplicationContext = centralStationInstance.Ainject.ResolveType<ICoreApplicationContext>();
+                this.coreApplicationContext = CentralStation.Instance.Ainject.ResolveType<ICoreApplicationContext>();
                 this.RegisterLocationManager(locationManager);
 
-                this.viewModel = centralStationInstance.Ainject.ResolveType<ISelectLocationViewModel>();
+                this.viewModel = CentralStation.Instance.Ainject.ResolveType<ISelectLocationViewModel>();
                 IList<TrackLocation> currentLocations = this.viewModel.ResolveCurrentLocations(geoCoder);
 
                 this.listView.Adapter = new TrackLocationListAdapter(this, currentLocations);

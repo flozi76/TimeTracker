@@ -1,18 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
 namespace TimeTracker
 {
-    using Android.Locations;
     using TimeTracker.Core.Domain;
     using TimeTracker.Core.Geo;
     using TimeTracker.Core.Ioc;
@@ -20,18 +7,23 @@ namespace TimeTracker
 
     public class CentralStation
     {
-        //private static CentralStation centralStation;
+        private static CentralStation centralStation;
         private Ainject ainject;
         private bool catalogInitialized;
+
+
+        private CentralStation()
+        {
+        }
 
         /// <summary>
         /// Gets the instance.
         /// </summary>
         /// <value>The instance.</value>
-        //public static CentralStation Instance
-        //{
-        //    get { return centralStation ?? (centralStation = new CentralStation()); }
-        //}
+        public static CentralStation Instance
+        {
+            get { return centralStation ?? (centralStation = new CentralStation()); }
+        }
 
         public Ainject Ainject
         {
