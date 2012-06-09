@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\CoordinateGeocoder.cs" />
     <Compile Include="Domain\CoreCoreApplicationContext.cs" />
+    <Compile Include="Domain\ICoordinateGeocoder.cs" />
     <Compile Include="Domain\ICoreApplicationContext.cs" />
     <Compile Include="Domain\TrackLocation.cs" />
     <Compile Include="Domain\TrackLocationManager.cs" />
@@ -61,7 +63,6 @@
     <Compile Include="Database\SQLite\TableQuery.cs" />
     <Compile Include="Database\TrackLocationsDatabase.cs" />
     <Compile Include="Geo\Coordinate.cs" />
-    <Compile Include="Geo\CurrentLocationListener.cs" />
     <Compile Include="Geo\DistanceCalculator.cs" />
     <Compile Include="Geo\Helper.cs" />
     <Compile Include="Geo\IDistanceCalculator.cs" />

@@ -20,23 +20,18 @@ namespace TimeTracker
 
     public class CentralStation
     {
-        private static CentralStation centralStation;
+        //private static CentralStation centralStation;
         private Ainject ainject;
-        private Context applicationContext;
         private bool catalogInitialized;
-
-        private CentralStation()
-        {
-        }
 
         /// <summary>
         /// Gets the instance.
         /// </summary>
         /// <value>The instance.</value>
-        public static CentralStation Instance
-        {
-            get { return centralStation ?? (centralStation = new CentralStation()); }
-        }
+        //public static CentralStation Instance
+        //{
+        //    get { return centralStation ?? (centralStation = new CentralStation()); }
+        //}
 
         public Ainject Ainject
         {
@@ -59,12 +54,11 @@ namespace TimeTracker
         {
             if (this.catalogInitialized == false)
             {
-                var locationManager = (LocationManager)this.applicationContext.GetSystemService(Context.LocationService);
-                ICoreApplicationContext coreApplicationContext = new CoreCoreApplicationContext();
-                ILocationListener currentLocationListener = new CurrentLocationListener(coreApplicationContext, locationManager, this.applicationContext);
+                this.ainject.RegisterType<ICoordinateGeocoder>(() => new CoordinateGeocoder());
+
+                ICoreApplicationContext coreApplicationContext = new CoreCoreApplicationContext(this.ainject.ResolveType<ICoordinateGeocoder>());
 
                 this.ainject.RegisterType(() => coreApplicationContext);
-                this.ainject.RegisterType(() => currentLocationListener);
                 this.ainject.RegisterType<IDistanceCalculator>(() => new DistanceCalculator());
 
                 // Register ViewModels
@@ -72,11 +66,6 @@ namespace TimeTracker
 
                 this.catalogInitialized = true;
             }
-        }
-
-        public void InitializeContext(Context applicationContext)
-        {
-            this.applicationContext = applicationContext;
         }
     }
 }

@@ -17,6 +17,12 @@ namespace TimeTracker.Core.BusinessLayer
         public string HouseNumber { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+
+        public new string ToString()
+        {
+            return string.Format("{0} {1} {2} {3} {4}\n Lat: '{5}' Lon: '{6}'", Name, Street, HouseNumber, PostalCode, City, Latitude, Longitude);
+        }
+
     }
 }
 

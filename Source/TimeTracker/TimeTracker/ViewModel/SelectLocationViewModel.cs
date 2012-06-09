@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace TimeTracker.ViewModel
 {
+    using Android.Locations;
     using TimeTracker.Core.BusinessLayer;
     using TimeTracker.Core.Domain;
 
@@ -14,19 +15,21 @@ namespace TimeTracker.ViewModel
             this.coreApplicationContext = coreApplicationContext;
         }
 
-        IList<TrackLocation> ISelectLocationViewModel.ResolveCurrentLocations()
+        IList<TrackLocation> ISelectLocationViewModel.ResolveCurrentLocations(Geocoder geoCoder)
         {
-            IList<TrackLocation> locations = new List<TrackLocation>();
+            IList<TrackLocation> locations = this.coreApplicationContext.GetListOfCurrentTrackLocationsToAdd(geoCoder);
 
-            locations.Add(this.coreApplicationContext.GetCurrentTrackLocation());
+            //IList<TrackLocation> locations = new List<TrackLocation>();
 
-            for (int i = 0; i < 10; i++)
-            {
-                locations.Add(new TrackLocation
-                                  {
-                                      Name = string.Format("location: {0}", i)
-                                  });
-            }
+            //locations.Add(this.coreApplicationContext.GetCurrentTrackLocation());
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    locations.Add(new TrackLocation
+            //                      {
+            //                          Name = string.Format("location: {0}", i)
+            //                      });
+            //}
 
             return locations;
         }

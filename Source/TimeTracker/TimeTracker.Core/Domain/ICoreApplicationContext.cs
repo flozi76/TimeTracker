@@ -1,5 +1,7 @@
 namespace TimeTracker.Core.Domain
 {
+    using System.Collections.Generic;
+    using Android.Locations;
     using TimeTracker.Core.BusinessLayer;
     using TimeTracker.Core.Geo;
 
@@ -12,5 +14,6 @@ namespace TimeTracker.Core.Domain
         Coordinate CurrentLocation { get; set; }
 
         TrackLocation GetCurrentTrackLocation();
+        IList<TrackLocation> GetListOfCurrentTrackLocationsToAdd(Geocoder geocoder);
     }
 }

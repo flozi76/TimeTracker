@@ -24,8 +24,6 @@ namespace TimeTracker
         {
             base.OnCreate(savedInstanceState);
 
-            CentralStation.Instance.InitializeContext(this.ApplicationContext);
-
             SetContentView(Resource.Layout.Main);
 
             this.listLocationsText = FindViewById<TextView>(Resource.Id.ListLocations);
@@ -52,7 +50,7 @@ namespace TimeTracker
                                                        };
 
             //this.stringBuilder = new StringBuilder();
-            //this.geocoder = new Geocoder(this);
+            //var geocoder = new Geocoder(this);
             //this.locationManager = (LocationManager)GetSystemService(LocationService);
 
 
