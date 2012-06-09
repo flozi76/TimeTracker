@@ -1,6 +1,6 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
+
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -13,7 +13,7 @@ namespace TimeTracker
     using TimeTracker.Core.Geo;
 
     [Activity(Label = "TimeTracker", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainControllerActivity : Activity, ILocationListener
+    public class MainActivity : Activity, ILocationListener
     {
         private TextView locationText;
         private LocationManager locationManager;
