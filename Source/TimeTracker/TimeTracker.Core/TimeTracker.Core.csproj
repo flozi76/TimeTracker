@@ -48,10 +48,10 @@
     <Compile Include="Domain\ICoordinateGeocoder.cs" />
     <Compile Include="Domain\ICoreApplicationContext.cs" />
     <Compile Include="Domain\IPerimeterWatchDog.cs" />
-    <Compile Include="Domain\ITrackLocationManager.cs" />
+    <Compile Include="Domain\ITimeTrackerWorkspace.cs" />
     <Compile Include="Domain\PerimeterWatchDog.cs" />
     <Compile Include="Domain\Entities\TrackLocation.cs" />
-    <Compile Include="Domain\TrackLocationManager.cs" />
+    <Compile Include="Domain\TimeTrackerWorkspace.cs" />
     <Compile Include="Database\SQLite\AutoIncrementAttribute.cs" />
     <Compile Include="Database\SQLite\CollationAttribute.cs" />
     <Compile Include="Database\SQLite\IgnoreAttribute.cs" />

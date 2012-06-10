@@ -38,29 +38,43 @@ namespace TimeTracker.Core.Database
             return (from i in this.Table<T>() select i);
         }
 
+        /// <summary>
+        /// Gets the entry.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id">The id.</param>
+        /// <returns>the entry with the given id</returns>
         public T GetEntry<T>(int id) where T : class, new()
         {
-            foreach (T unknown in (this.Table<T>().Where(i => (i as Entity != null) && (i as Entity).ID == id)))
-                return unknown;
-            return default(T);
+            return (this.Table<T>().Where(i => (i as Entity != null) && (i as Entity).ID == id)).FirstOrDefault();
         }
 
-        public int SaveLocation(TrackLocation item)
+        /// <summary>
+        /// Sates the entity.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public int SateEntity<T>(T item)
         {
-            if (item.ID != 0)
+            var entity = item as Entity;
+            if (entity != null && entity.ID != 0)
             {
-                base.Update(item);
-                return item.ID;
+                this.Update(entity);
+                return entity.ID;
             }
-            else
-            {
-                return base.Insert(item);
-            }
+
+            return this.Insert(item);
         }
 
+        /// <summary>
+        /// Deletes the location.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns></returns>
         public int DeleteLocation(int id)
         {
-            return base.Delete<TrackLocation>(new TrackLocation() { ID = id });
+            return this.Delete(new TrackLocation() { ID = id });
         }
     }
 }

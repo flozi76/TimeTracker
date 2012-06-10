@@ -48,12 +48,12 @@ namespace TimeTracker
             {
                 this.ainject.RegisterType<ICoordinateGeocoder>(() => new CoordinateGeocoder());
 
-                ICoreApplicationContext coreApplicationContext = new CoreCoreApplicationContext(this.ainject.ResolveType<ICoordinateGeocoder>());
+                this.ainject.RegisterType<IDistanceCalculator>(() => new DistanceCalculator());
+                this.ainject.RegisterType<ITimeTrackerWorkspace>(() => new TimeTrackerWorkspace(this.ainject.ResolveType<IDistanceCalculator>()));
+                ICoreApplicationContext coreApplicationContext = new CoreCoreApplicationContext(this.ainject.ResolveType<ICoordinateGeocoder>(), this.ainject.ResolveType<ITimeTrackerWorkspace>());
 
                 this.ainject.RegisterType(() => coreApplicationContext);
-                this.ainject.RegisterType<IDistanceCalculator>(() => new DistanceCalculator());
-                this.ainject.RegisterType<ITrackLocationManager>(() => new TrackLocationManager(this.ainject.ResolveType<IDistanceCalculator>()));
-                this.ainject.RegisterType<IPerimeterWatchDog>(() => new PerimeterWatchDog(coreApplicationContext, this.ainject.ResolveType<IDistanceCalculator>(), this.ainject.ResolveType<ITrackLocationManager>()));
+                this.ainject.RegisterType<IPerimeterWatchDog>(() => new PerimeterWatchDog(coreApplicationContext, this.ainject.ResolveType<IDistanceCalculator>(), this.ainject.ResolveType<ITimeTrackerWorkspace>()));
 
                 // Register ViewModels
                 this.ainject.RegisterType<ISelectLocationViewModel>(() => new SelectLocationViewModel(this.ainject.ResolveType<ICoreApplicationContext>()));

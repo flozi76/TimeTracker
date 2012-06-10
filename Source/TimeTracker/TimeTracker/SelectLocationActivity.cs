@@ -50,7 +50,7 @@ namespace TimeTracker
                     //backToMain.PutExtra("TaskID", this._tasks[e.Position].ID);
                     var item = currentLocations[e.Position];
 
-                    CentralStation.Instance.Ainject.ResolveType<ITrackLocationManager>().SaveCurrentLocation(item);
+                    CentralStation.Instance.Ainject.ResolveType<ITimeTrackerWorkspace>().SaveTrackLocation(item);
 
                     this.StartActivity(backToMain);
                 };

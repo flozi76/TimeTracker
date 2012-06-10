@@ -30,7 +30,7 @@ namespace TimeTracker
 
             this.BindElements();
 
-            var trackLocations = CentralStation.Instance.Ainject.ResolveType<ITrackLocationManager>().GetTrackLocations();
+            var trackLocations = CentralStation.Instance.Ainject.ResolveType<ITimeTrackerWorkspace>().GetTrackLocations();
             var stringBuilderList = new StringBuilder();
             foreach (var trackLocation in trackLocations)
             {

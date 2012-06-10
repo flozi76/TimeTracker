@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace TimeTracker.Core.Domain
 {
+    using System;
     using Android.Locations;
     using Android.Util;
     using TimeTracker.Core.Domain.Entities;
@@ -10,11 +11,13 @@ namespace TimeTracker.Core.Domain
     public class CoreCoreApplicationContext : ICoreApplicationContext
     {
         private readonly ICoordinateGeocoder coordinateGeocoder;
+        private readonly ITimeTrackerWorkspace timeTrackerWorkspace;
         private TrackLocation currentTrackLocation;
 
-        public CoreCoreApplicationContext(ICoordinateGeocoder coordinateGeocoder)
+        public CoreCoreApplicationContext(ICoordinateGeocoder coordinateGeocoder, ITimeTrackerWorkspace timeTrackerWorkspace)
         {
             this.coordinateGeocoder = coordinateGeocoder;
+            this.timeTrackerWorkspace = timeTrackerWorkspace;
         }
 
         public Coordinate CurrentLocation { get; set; }
@@ -43,11 +46,13 @@ namespace TimeTracker.Core.Domain
         private void WriteEnterPerimeterEvent(TrackLocation enterTrackLocation)
         {
             Log.Debug(this.GetType().Name, "Enter Perimeter");
+            this.timeTrackerWorkspace.SaveTrackLocationLogEntry(new TrackLocationLogEntry { EnterTime = DateTime.Now, TrackLocationId = enterTrackLocation.ID });
         }
 
         private void WriteExitPerimeterEvent(TrackLocation exitTrackLocation)
         {
             Log.Debug(this.GetType().Name, "Exit Perimeter");
+            this.timeTrackerWorkspace.SaveTrackLocationLogEntry(new TrackLocationLogEntry { ExitTime = DateTime.Now, TrackLocationId = exitTrackLocation.ID });
         }
 
         /// <summary>

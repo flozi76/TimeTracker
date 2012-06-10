@@ -19,13 +19,13 @@ namespace TimeTracker.Core.Domain
     {
         private readonly ICoreApplicationContext coreApplicationContext;
         private readonly IDistanceCalculator distanceCalculator;
-        private readonly ITrackLocationManager trackLocationManager;
+        private readonly ITimeTrackerWorkspace timeTrackerWorkspace;
 
-        public PerimeterWatchDog(ICoreApplicationContext coreApplicationContext, IDistanceCalculator distanceCalculator, ITrackLocationManager trackLocationManager)
+        public PerimeterWatchDog(ICoreApplicationContext coreApplicationContext, IDistanceCalculator distanceCalculator, ITimeTrackerWorkspace timeTrackerWorkspace)
         {
             this.coreApplicationContext = coreApplicationContext;
             this.distanceCalculator = distanceCalculator;
-            this.trackLocationManager = trackLocationManager;
+            this.timeTrackerWorkspace = timeTrackerWorkspace;
         }
 
         public void CheckPerimeter()
@@ -56,7 +56,7 @@ namespace TimeTracker.Core.Domain
         /// <returns></returns>
         private TrackLocation FindTrackLocationForCoordinate(Coordinate coordinate)
         {
-            return this.trackLocationManager.GetTrackLocationForCoordinate(coordinate);
+            return this.timeTrackerWorkspace.GetTrackLocationForCoordinate(coordinate);
         }
     }
 }
