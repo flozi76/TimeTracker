@@ -13,7 +13,7 @@ using Android.Widget;
 namespace TimeTracker.Core.Domain
 {
     using Android.Locations;
-    using TimeTracker.Core.BusinessLayer;
+    using TimeTracker.Core.Domain.Entities;
     using TimeTracker.Core.Geo;
 
     public class CoordinateGeocoder : ICoordinateGeocoder

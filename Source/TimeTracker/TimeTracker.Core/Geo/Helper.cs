@@ -4,6 +4,7 @@ namespace TimeTracker.Core.Geo
 {
     using System.Collections.Generic;
     using Android.Locations;
+    using TimeTracker.Core.Domain.Entities;
 
     public static class Helper
     {
@@ -75,6 +76,16 @@ namespace TimeTracker.Core.Geo
         /// <param name="location">The location.</param>
         /// <returns>Coordinates for the location</returns>
         public static Coordinate ToCoordinate(this Location location)
+        {
+            return new Coordinate { Longitude = location.Longitude, Latitude = location.Latitude };
+        }
+
+        /// <summary>
+        /// Toes the coordinate.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <returns>Coordinates for the location</returns>
+        public static Coordinate ToCoordinate(this TrackLocation location)
         {
             return new Coordinate { Longitude = location.Longitude, Latitude = location.Latitude };
         }

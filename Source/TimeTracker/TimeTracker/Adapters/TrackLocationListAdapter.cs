@@ -4,7 +4,7 @@ using Android.Widget;
 
 namespace TimeTracker.Adapters
 {
-    using TimeTracker.Core.BusinessLayer;
+    using TimeTracker.Core.Domain.Entities;
 
     public class TrackLocationListAdapter : BaseAdapter<TrackLocation>
     {

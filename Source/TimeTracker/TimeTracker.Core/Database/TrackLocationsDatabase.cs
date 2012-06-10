@@ -3,8 +3,8 @@ using System.Collections.Generic;
 namespace TimeTracker.Core.Database
 {
     using System.Linq;
-    using TimeTracker.Core.BusinessLayer;
     using TimeTracker.Core.Database.SQLite;
+    using TimeTracker.Core.Domain.Entities;
 
     /// <summary>
     /// TrackLocationsDatabase builds on SQLite.Net and represents a specific database, in our case, the TrackLocation DB.

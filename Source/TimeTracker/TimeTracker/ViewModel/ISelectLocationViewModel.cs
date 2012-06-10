@@ -2,7 +2,7 @@ namespace TimeTracker.ViewModel
 {
     using System.Collections.Generic;
     using Android.Locations;
-    using TimeTracker.Core.BusinessLayer;
+    using TimeTracker.Core.Domain.Entities;
 
     public interface ISelectLocationViewModel
     {

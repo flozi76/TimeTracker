@@ -13,7 +13,7 @@ using Android.Widget;
 namespace TimeTracker.Core.Domain
 {
     using Android.Locations;
-    using TimeTracker.Core.BusinessLayer;
+    using TimeTracker.Core.Domain.Entities;
     using TimeTracker.Core.Geo;
 
     public class CoreCoreApplicationContext : ICoreApplicationContext
@@ -26,6 +26,8 @@ namespace TimeTracker.Core.Domain
         }
 
         public Coordinate CurrentLocation { get; set; }
+
+        public TrackLocation LastTrackLocation { get; set; }
 
         public IList<TrackLocation> GetListOfCurrentTrackLocationsToAdd(Geocoder geocoder)
         {

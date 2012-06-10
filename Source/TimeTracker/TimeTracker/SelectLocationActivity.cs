@@ -9,13 +9,13 @@ namespace TimeTracker
     using Android.Content;
     using Android.Locations;
     using Android.OS;
+    using Android.Util;
     using Android.Widget;
     using TimeTracker.Adapters;
-    using TimeTracker.Core.BusinessLayer;
     using TimeTracker.Core.Domain;
+    using TimeTracker.Core.Domain.Entities;
     using TimeTracker.Core.Geo;
     using TimeTracker.ViewModel;
-    using Debug = System.Diagnostics.Debug;
 
     [Activity(Label = "Select Location")]
     public class SelectLocationActivity : Activity, ILocationListener
@@ -28,6 +28,7 @@ namespace TimeTracker
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SelectLocation);
+
             var locationManager = (LocationManager)this.GetSystemService(LocationService);
             var geoCoder = new Geocoder(this);
             this.listView = this.FindViewById<ListView>(Resource.Id.listViewSelectLocations);
@@ -35,7 +36,7 @@ namespace TimeTracker
             try
             {
                 this.coreApplicationContext = CentralStation.Instance.Ainject.ResolveType<ICoreApplicationContext>();
-                this.RegisterLocationManager(locationManager);
+                locationManager.RegisterLocationManager(this, this.coreApplicationContext);
 
                 this.viewModel = CentralStation.Instance.Ainject.ResolveType<ISelectLocationViewModel>();
                 IList<TrackLocation> currentLocations = this.viewModel.ResolveCurrentLocations(geoCoder);
@@ -43,7 +44,7 @@ namespace TimeTracker
                 this.listView.Adapter = new TrackLocationListAdapter(this, currentLocations);
                 this.listView.TextFilterEnabled = true;
 
-                this.listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                this.listView.ItemClick += (sender, e) =>
                 {
                     var backToMain = new Intent(this, typeof(MainActivity));
                     //backToMain.PutExtra("TaskID", this._tasks[e.Position].ID);
@@ -56,45 +57,21 @@ namespace TimeTracker
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Log.Error(this.GetType().Name, ex.StackTrace);
             }
-        }
-
-        private void RegisterLocationManager(LocationManager locationManager)
-        {
-            var criteria = new Criteria
-                               {
-                                   Accuracy = Accuracy.Coarse,
-                                   PowerRequirement = Power.Low,
-                               };
-            string bestProvider = locationManager.GetBestProvider(criteria, true);
-            Location lastKnownLocation = locationManager.GetLastKnownLocation(bestProvider);
-            this.coreApplicationContext.CurrentLocation = lastKnownLocation.ToCoordinate();
-            locationManager.RequestLocationUpdates(bestProvider, 1000, 1, this);
         }
 
         public void OnLocationChanged(Location location)
         {
-            this.coreApplicationContext.CurrentLocation = location.ToCoordinate();
+            try
+            {
+                this.coreApplicationContext.CurrentLocation = location.ToCoordinate();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(this.GetType().Name, ex.StackTrace);
+            }
         }
-
-        //protected override void OnResume()
-        //{
-        //    base.OnResume();
-        //    this.listView = this.FindViewById<ListView>(Resource.Id.listViewSelectLocations);
-        //    var centralStationInstance = new CentralStation(this.ApplicationContext);
-        //    try
-        //    {
-        //        this.viewModel = centralStationInstance.Ainject.ResolveType<ISelectLocationViewModel>();
-        //        IList<TrackLocation> currentLocations = this.viewModel.ResolveCurrentLocations();
-        //        this.listView.Adapter = new TrackLocationListAdapter(this, currentLocations);
-        //        this.listView.TextFilterEnabled = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex);
-        //    }
-        //}
 
         public void OnProviderDisabled(string provider)
         {

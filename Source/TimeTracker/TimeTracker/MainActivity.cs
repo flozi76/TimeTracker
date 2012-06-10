@@ -11,7 +11,6 @@ namespace TimeTracker
     using Android.Content;
     using Android.Locations;
     using Android.Util;
-    using TimeTracker.Core.BusinessLayer;
     using TimeTracker.Core.Domain;
     using TimeTracker.Core.Geo;
 

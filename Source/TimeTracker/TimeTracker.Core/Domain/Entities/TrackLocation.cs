@@ -1,4 +1,4 @@
-namespace TimeTracker.Core.BusinessLayer
+namespace TimeTracker.Core.Domain.Entities
 {
     using TimeTracker.Core.Database.SQLite;
 
@@ -20,7 +20,7 @@ namespace TimeTracker.Core.BusinessLayer
 
         public new string ToString()
         {
-            return string.Format("{0} {1} {2} {3} {4}\n Lat: '{5}' Lon: '{6}'", Name, Street, HouseNumber, PostalCode, City, Latitude, Longitude);
+            return string.Format("{0} {1} {2} {3} {4}\n Lat: '{5}' Lon: '{6}'", this.Name, this.Street, this.HouseNumber, this.PostalCode, this.City, this.Latitude, this.Longitude);
         }
 
     }

@@ -3,8 +3,8 @@ namespace TimeTracker.Core.Domain
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using TimeTracker.Core.BusinessLayer;
     using TimeTracker.Core.Database;
+    using TimeTracker.Core.Domain.Entities;
 
     public class TrackLocationManager : ITrackLocationManager
     {

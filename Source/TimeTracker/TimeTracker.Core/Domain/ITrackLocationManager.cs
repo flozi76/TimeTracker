@@ -1,7 +1,7 @@
 namespace TimeTracker.Core.Domain
 {
     using System.Collections.Generic;
-    using TimeTracker.Core.BusinessLayer;
+    using TimeTracker.Core.Domain.Entities;
 
     public interface ITrackLocationManager
     {
