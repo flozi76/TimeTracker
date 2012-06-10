@@ -13,8 +13,23 @@ namespace TimeTracker.Core.Domain
         /// <value>The current location.</value>
         Coordinate CurrentLocation { get; set; }
 
-        TrackLocation LastTrackLocation { get; set; }
+        /// <summary>
+        /// Gets the last track location.
+        /// </summary>
+        /// <value>The last track location.</value>
+        TrackLocation CurrentTrackLocation { get; }
 
+        /// <summary>
+        /// Gets the list of current track locations to add.
+        /// </summary>
+        /// <param name="geocoder">The geocoder.</param>
+        /// <returns></returns>
         IList<TrackLocation> GetListOfCurrentTrackLocationsToAdd(Geocoder geocoder);
+
+        /// <summary>
+        /// Sets the track location.
+        /// </summary>
+        /// <param name="trackLocation">The track location.</param>
+        void SetTrackLocation(TrackLocation trackLocation);
     }
 }

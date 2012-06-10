@@ -2,15 +2,14 @@ using System;
 
 namespace TimeTracker.Core.Geo
 {
+    using TimeTracker.Core.Domain;
+
     public enum UnitsOfLength { Mile, NauticalMiles, Kilometer, Meter }
     public enum CardinalPoints { N, E, W, S, Ne, Nw, Se, Sw }
 
 
     public class DistanceCalculator : IDistanceCalculator
     {
-        private const Double MilesToKilometers = 1.609344;
-        private const Double MilesToNautical = 0.8684;
-
         /// <summary>
         /// Calculates the distance between two points of latitude and longitude.
         /// Great Link - http://www.movable-type.co.uk/scripts/latlong.html
@@ -31,11 +30,11 @@ namespace TimeTracker.Core.Geo
             distance = distance * 60 * 1.1515;
 
             if (unitsOfLength == UnitsOfLength.Kilometer)
-                distance = distance * MilesToKilometers;
+                distance = distance * Constants.MilesToKilometers;
             else if (unitsOfLength == UnitsOfLength.NauticalMiles)
-                distance = distance * MilesToNautical;
+                distance = distance * Constants.MilesToNautical;
             else if (unitsOfLength == UnitsOfLength.Meter)
-                distance = distance * MilesToKilometers * 1000;
+                distance = distance * Constants.MilesToKilometers * 1000;
 
             return (distance);
 

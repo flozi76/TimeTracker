@@ -30,10 +30,22 @@ namespace TimeTracker.Core.Domain
 
         public void CheckPerimeter()
         {
-            if (this.coreApplicationContext.LastTrackLocation != null && this.coreApplicationContext.CurrentLocation != null)
+            if (this.coreApplicationContext.CurrentLocation != null)
             {
-                var distance = distanceCalculator.Distance(this.coreApplicationContext.CurrentLocation, this.coreApplicationContext.LastTrackLocation.ToCoordinate(), UnitsOfLength.Meter);
+                if (this.coreApplicationContext.CurrentTrackLocation != null)
+                {
+                    var distance = distanceCalculator.Distance(this.coreApplicationContext.CurrentLocation, this.coreApplicationContext.CurrentTrackLocation.ToCoordinate(), UnitsOfLength.Meter);
+                    if (distance < Constants.PerimeterDistance)
+                    {
+                        // All OK still in perimeter of current TrackLocation
+                        return;
+                    }
 
+                    this.coreApplicationContext.SetTrackLocation(null);
+                }
+
+                var location = this.FindTrackLocationForCoordinate(this.coreApplicationContext.CurrentLocation);
+                this.coreApplicationContext.SetTrackLocation(location);
             }
         }
 
@@ -44,7 +56,7 @@ namespace TimeTracker.Core.Domain
         /// <returns></returns>
         private TrackLocation FindTrackLocationForCoordinate(Coordinate coordinate)
         {
-            return null;
+            return this.trackLocationManager.GetTrackLocationForCoordinate(coordinate);
         }
     }
 }

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Constants.cs" />
     <Compile Include="Domain\CoordinateGeocoder.cs" />
     <Compile Include="Domain\CoreCoreApplicationContext.cs" />
     <Compile Include="Domain\ICoordinateGeocoder.cs" />
