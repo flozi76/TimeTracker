@@ -18,6 +18,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnStopLocationListener" />
+    <Button
+        android:text="Show Log Entries"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnShowLogEntries" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="fill_parent"

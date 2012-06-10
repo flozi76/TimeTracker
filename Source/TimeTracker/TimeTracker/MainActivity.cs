@@ -21,6 +21,7 @@ namespace TimeTracker
         private TextView listLocationsText;
         private Button startListenServiceButton;
         private Button stopListenServiceButton;
+        private Button showLogEntries;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -52,6 +53,12 @@ namespace TimeTracker
                                                            StartActivity(intent);
                                                        };
 
+            this.showLogEntries.Click += delegate
+                                             {
+                                                 var intent = new Intent(this, typeof(LogEntriesListActivity));
+                                                 StartActivity(intent);
+                                             };
+
             this.startListenServiceButton.Click += delegate
                                                        {
                                                            var intent = new Intent(this, typeof(TimeTrackerService));
@@ -71,6 +78,7 @@ namespace TimeTracker
             this.addCurrentLocationButton = FindViewById<Button>(Resource.Id.btnTrackcCurrentLocation);
             this.startListenServiceButton = FindViewById<Button>(Resource.Id.btnStartLocationListener);
             this.stopListenServiceButton = FindViewById<Button>(Resource.Id.btnStopLocationListener);
+            this.showLogEntries = FindViewById<Button>(Resource.Id.btnShowLogEntries);
         }
     }
 }

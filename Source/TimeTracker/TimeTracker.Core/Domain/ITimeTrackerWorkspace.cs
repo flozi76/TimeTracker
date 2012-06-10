@@ -18,5 +18,11 @@ namespace TimeTracker.Core.Domain
         /// <param name="trackLocationLogEntry">The track location log entry.</param>
         /// <returns></returns>
         int SaveTrackLocationLogEntry(TrackLocationLogEntry trackLocationLogEntry);
+
+        /// <summary>
+        /// Gets the track location log entries.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<TrackLocationLogEntry> GetTrackLocationLogEntries();
     }
 }

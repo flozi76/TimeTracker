@@ -55,16 +55,40 @@ namespace TimeTracker.Core.Domain
             return this.database.GetAll<TrackLocation>();
         }
 
+        /// <summary>
+        /// Gets the track location log entries.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<TrackLocationLogEntry> GetTrackLocationLogEntries()
+        {
+            return this.database.GetAll<TrackLocationLogEntry>();
+        }
+
+        /// <summary>
+        /// Saves the track location.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
         public int SaveTrackLocation(TrackLocation item)
         {
             return this.database.SateEntity(item);
         }
 
+        /// <summary>
+        /// Deletes the track location.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns></returns>
         public int DeleteTrackLocation(int id)
         {
             return this.database.DeleteLocation(id);
         }
 
+        /// <summary>
+        /// Gets the track location for coordinate.
+        /// </summary>
+        /// <param name="coordinate">The coordinate.</param>
+        /// <returns></returns>
         public TrackLocation GetTrackLocationForCoordinate(Coordinate coordinate)
         {
             var locations = this.GetTrackLocations();
