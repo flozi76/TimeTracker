@@ -1,14 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace TimeTracker.Core.Domain
 {
@@ -40,6 +30,11 @@ namespace TimeTracker.Core.Domain
         /// <param name="trackLocation">The track location.</param>
         public void SetTrackLocation(TrackLocation trackLocation)
         {
+            if (trackLocation == this.currentTrackLocation)
+            {
+                return;
+            }
+
             this.WriteExitPerimeterEvent(this.currentTrackLocation);
             this.currentTrackLocation = trackLocation;
             this.WriteEnterPerimeterEvent(this.currentTrackLocation);

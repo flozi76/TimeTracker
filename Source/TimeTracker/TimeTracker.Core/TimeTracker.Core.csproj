@@ -43,6 +43,8 @@
     <Compile Include="Domain\Constants.cs" />
     <Compile Include="Domain\CoordinateGeocoder.cs" />
     <Compile Include="Domain\CoreCoreApplicationContext.cs" />
+    <Compile Include="Database\Entity.cs" />
+    <Compile Include="Domain\Entities\TrackLocationLogEntry.cs" />
     <Compile Include="Domain\ICoordinateGeocoder.cs" />
     <Compile Include="Domain\ICoreApplicationContext.cs" />
     <Compile Include="Domain\IPerimeterWatchDog.cs" />
@@ -65,7 +67,7 @@
     <Compile Include="Database\SQLite\TableInfo.cs" />
     <Compile Include="Database\SQLite\TableMapping.cs" />
     <Compile Include="Database\SQLite\TableQuery.cs" />
-    <Compile Include="Database\TrackLocationsDatabase.cs" />
+    <Compile Include="Database\TimeTrackerDatabase.cs" />
     <Compile Include="Geo\Coordinate.cs" />
     <Compile Include="Geo\DistanceCalculator.cs" />
     <Compile Include="Geo\Helper.cs" />

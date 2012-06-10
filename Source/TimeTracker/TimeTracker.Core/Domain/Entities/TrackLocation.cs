@@ -5,10 +5,8 @@ namespace TimeTracker.Core.Domain.Entities
     /// <summary>
     /// Represents a TrackLocation.
     /// </summary>
-    public partial class TrackLocation
+    public class TrackLocation : Entity
     {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

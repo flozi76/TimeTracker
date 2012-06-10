@@ -10,7 +10,7 @@ namespace TimeTracker.Core.Domain
     public class TrackLocationManager : ITrackLocationManager
     {
         private readonly IDistanceCalculator distanceCalculator;
-        private readonly TrackLocationsDatabase database;
+        private readonly TimeTrackerDatabase database;
         private readonly string databaseLocation;
 
         public TrackLocationManager(IDistanceCalculator distanceCalculator)
@@ -21,17 +21,17 @@ namespace TimeTracker.Core.Domain
             this.databaseLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "LocationsDb.db3");
 
             // instantiate the database	
-            this.database = new TrackLocationsDatabase(this.databaseLocation);
+            this.database = new TimeTrackerDatabase(this.databaseLocation);
         }
 
         public TrackLocation GetLocation(int id)
         {
-            return this.database.GetLocation(id);
+            return this.database.GetEntry<TrackLocation>(id);
         }
 
         public IEnumerable<TrackLocation> GetTrackLocations()
         {
-            return this.database.GetLocations();
+            return this.database.GetAll<TrackLocation>();
         }
 
         public int SaveCurrentLocation(TrackLocation item)

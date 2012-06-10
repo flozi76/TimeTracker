@@ -7,38 +7,42 @@ namespace TimeTracker.Core.Database
     using TimeTracker.Core.Domain.Entities;
 
     /// <summary>
-    /// TrackLocationsDatabase builds on SQLite.Net and represents a specific database, in our case, the TrackLocation DB.
+    /// TimeTrackerDatabase builds on SQLite.Net and represents a specific database, in our case, the TrackLocation DB.
     /// It contains methods for retreival and persistance as well as db creation, all based on the 
     /// underlying ORM.
     /// </summary>
-    public class TrackLocationsDatabase : SQLiteConnection
+    public class TimeTrackerDatabase : SQLiteConnection
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TrackLocationy.DL.TrackLocationDatabase"/> TrackLocationsDatabase. 
+        /// Initializes a new instance of the <see cref="TrackLocationy.DL.TrackLocationDatabase"/> TimeTrackerDatabase. 
         /// if the database doesn't exist, it will create the database and all the tables.
         /// </summary>
         /// <param name='path'>
         /// Path.
         /// </param>
-        public TrackLocationsDatabase(string path)
+        public TimeTrackerDatabase(string path)
             : base(path)
         {
             // create the tables
             CreateTable<TrackLocation>();
+            CreateTable<TrackLocationLogEntry>();
         }
 
-        //TODO: make these methods generic, Add<T>(item), etc.
-
-        public IEnumerable<TrackLocation> GetLocations()
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>All entries in the Database</returns>
+        public IEnumerable<T> GetAll<T>() where T : new()
         {
-            return (from i in this.Table<TrackLocation>() select i);
+            return (from i in this.Table<T>() select i);
         }
 
-        public TrackLocation GetLocation(int id)
+        public T GetEntry<T>(int id) where T : class, new()
         {
-            return (from i in Table<TrackLocation>()
-                    where i.ID == id
-                    select i).FirstOrDefault();
+            foreach (T unknown in (this.Table<T>().Where(i => (i as Entity != null) && (i as Entity).ID == id)))
+                return unknown;
+            return default(T);
         }
 
         public int SaveLocation(TrackLocation item)
