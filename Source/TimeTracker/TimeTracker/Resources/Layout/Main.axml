@@ -8,6 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnTrackcCurrentLocation" />
+    <Button
+        android:text="Start Location Listener"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnStartLocationListener" />
+    <Button
+        android:text="Stop Location Listener"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnStopLocationListener" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="fill_parent"
