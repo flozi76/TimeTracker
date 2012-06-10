@@ -4,4 +4,4 @@
     p1:minHeight="25px"
     p1:layout_width="fill_parent"
     p1:layout_height="fill_parent"
-    p1:id="@+id/listViewSelectLocations" />
+    p1:id="@+id/listViewLogEntries" />
