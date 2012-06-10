@@ -26,22 +26,6 @@ namespace TimeTracker.Core.Domain
         }
 
         public Coordinate CurrentLocation { get; set; }
-        public TrackLocation GetCurrentTrackLocation()
-        {
-            if (this.CurrentLocation != null)
-            {
-
-
-                var trackLocation = new TrackLocation
-                                        {
-                                            Name = string.Format("{0} - {1}", this.CurrentLocation.Latitude, this.CurrentLocation.Longitude)
-                                        };
-
-                return trackLocation;
-            }
-
-            return null;
-        }
 
         public IList<TrackLocation> GetListOfCurrentTrackLocationsToAdd(Geocoder geocoder)
         {

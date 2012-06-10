@@ -13,7 +13,6 @@ namespace TimeTracker.Core.Domain
         /// <value>The current location.</value>
         Coordinate CurrentLocation { get; set; }
 
-        TrackLocation GetCurrentTrackLocation();
         IList<TrackLocation> GetListOfCurrentTrackLocationsToAdd(Geocoder geocoder);
     }
 }
