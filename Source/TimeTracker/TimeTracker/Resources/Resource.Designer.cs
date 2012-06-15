@@ -40,41 +40,44 @@ namespace TimeTracker
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f05000b
+			public const int ListLocations = 2131034123;
+			
 			// aapt resource value: 0x7f05000a
-			public const int ListLocations = 2131034122;
+			public const int TextLocation = 2131034122;
 			
 			// aapt resource value: 0x7f050009
-			public const int TextLocation = 2131034121;
-			
-			// aapt resource value: 0x7f050008
-			public const int btnShowLogEntries = 2131034120;
-			
-			// aapt resource value: 0x7f050006
-			public const int btnStartLocationListener = 2131034118;
+			public const int btnShowLogEntries = 2131034121;
 			
 			// aapt resource value: 0x7f050007
-			public const int btnStopLocationListener = 2131034119;
+			public const int btnStartLocationListener = 2131034119;
 			
-			// aapt resource value: 0x7f050005
-			public const int btnTrackcCurrentLocation = 2131034117;
+			// aapt resource value: 0x7f050008
+			public const int btnStopLocationListener = 2131034120;
+			
+			// aapt resource value: 0x7f050006
+			public const int btnTrackcCurrentLocation = 2131034118;
+			
+			// aapt resource value: 0x7f050003
+			public const int buttonSaveLocation = 2131034115;
 			
 			// aapt resource value: 0x7f050002
-			public const int buttonSaveLocation = 2131034114;
+			public const int editTextLocationName = 2131034114;
+			
+			// aapt resource value: 0x7f050005
+			public const int listViewLogEntries = 2131034117;
+			
+			// aapt resource value: 0x7f05000c
+			public const int listViewSelectLocations = 2131034124;
 			
 			// aapt resource value: 0x7f050001
-			public const int editText1 = 2131034113;
-			
-			// aapt resource value: 0x7f050004
-			public const int listViewLogEntries = 2131034116;
-			
-			// aapt resource value: 0x7f05000b
-			public const int listViewSelectLocations = 2131034123;
+			public const int textView1 = 2131034113;
 			
 			// aapt resource value: 0x7f050000
 			public const int textViewLocationInfo = 2131034112;
 			
-			// aapt resource value: 0x7f050003
-			public const int textViewLocationItem = 2131034115;
+			// aapt resource value: 0x7f050004
+			public const int textViewLocationItem = 2131034116;
 			
 			private Id()
 			{

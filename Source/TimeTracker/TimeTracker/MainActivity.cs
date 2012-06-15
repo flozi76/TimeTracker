@@ -35,7 +35,7 @@ namespace TimeTracker
             var stringBuilderList = new StringBuilder();
             foreach (var trackLocation in trackLocations)
             {
-                stringBuilderList.AppendLine(string.Format("{0} {1} {2} {3} {4}", trackLocation.ID, trackLocation.PostalCode, trackLocation.City, trackLocation.Street, trackLocation.HouseNumber));
+                stringBuilderList.AppendLine(string.Format("{0} {1} {2} {3} {4}", trackLocation.Name, trackLocation.PostalCode, trackLocation.City, trackLocation.Street, trackLocation.HouseNumber));
                 stringBuilderList.AppendLine(string.Format("Lat: {0} Lon: {1}", trackLocation.Latitude, trackLocation.Longitude));
             }
 

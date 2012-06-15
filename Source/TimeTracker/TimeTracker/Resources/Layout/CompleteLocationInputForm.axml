@@ -4,15 +4,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <TextView
-        android:text="Medium Text"
+        android:text="&lt;Location&gt;"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewLocationInfo" />
+    <TextView
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText1" />
+        android:id="@+id/editTextLocationName" />
     <Button
         android:text="Save location"
         android:layout_width="match_parent"

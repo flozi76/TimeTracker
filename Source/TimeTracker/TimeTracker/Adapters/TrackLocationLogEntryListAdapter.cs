@@ -56,7 +56,7 @@ namespace TimeTracker.Adapters
                 if (item != null)
                 {
                     //Assign this item's values to the various subviews
-                    textItem.SetText(string.Format("{0} - {1}", item.LogEntry, item.LogDateTime), TextView.BufferType.Normal);
+                    textItem.SetText(string.Format("{0} - {1} - {2}", item.LogEntry, item.LogDateTime, item.LocationName), TextView.BufferType.Normal);
                     //textEntry.SetText(item.LocationName, TextView.BufferType.Normal);
                 }
             }
