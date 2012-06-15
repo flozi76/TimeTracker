@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Domain\Constants.cs" />
     <Compile Include="Domain\CoordinateGeocoder.cs" />
-    <Compile Include="Domain\CoreCoreApplicationContext.cs" />
+    <Compile Include="Domain\CoreApplicationContext.cs" />
     <Compile Include="Database\Entity.cs" />
     <Compile Include="Domain\Entities\TrackLocationLogEntry.cs" />
     <Compile Include="Domain\ICoordinateGeocoder.cs" />

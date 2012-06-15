@@ -51,11 +51,13 @@ namespace TimeTracker.Adapters
             {
                 // Find references to each subview in the list item's view
                 var textItem = view.FindViewById<TextView>(Resource.Id.textViewLocationItem);
+                var textEntry = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextLocationName);
 
                 if (item != null)
                 {
                     //Assign this item's values to the various subviews
-                    textItem.SetText(item.ToString(), TextView.BufferType.Normal);
+                    textItem.SetText(string.Format("{0} - {1}", item.LogEntry, item.LogDateTime), TextView.BufferType.Normal);
+                    textEntry.SetText(item.LocationName, TextView.BufferType.Normal);
                 }
             }
 

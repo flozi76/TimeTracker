@@ -50,7 +50,7 @@ namespace TimeTracker
 
                 this.ainject.RegisterType<IDistanceCalculator>(() => new DistanceCalculator());
                 this.ainject.RegisterType<ITimeTrackerWorkspace>(() => new TimeTrackerWorkspace(this.ainject.ResolveType<IDistanceCalculator>()));
-                ICoreApplicationContext coreApplicationContext = new CoreCoreApplicationContext(this.ainject.ResolveType<ICoordinateGeocoder>(), this.ainject.ResolveType<ITimeTrackerWorkspace>());
+                ICoreApplicationContext coreApplicationContext = new CoreApplicationContext(this.ainject.ResolveType<ICoordinateGeocoder>(), this.ainject.ResolveType<ITimeTrackerWorkspace>());
 
                 this.ainject.RegisterType(() => coreApplicationContext);
                 this.ainject.RegisterType<IPerimeterWatchDog>(() => new PerimeterWatchDog(coreApplicationContext, this.ainject.ResolveType<IDistanceCalculator>(), this.ainject.ResolveType<ITimeTrackerWorkspace>()));

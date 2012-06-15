@@ -8,13 +8,13 @@ namespace TimeTracker.Core.Domain
     using TimeTracker.Core.Domain.Entities;
     using TimeTracker.Core.Geo;
 
-    public class CoreCoreApplicationContext : ICoreApplicationContext
+    public class CoreApplicationContext : ICoreApplicationContext
     {
         private readonly ICoordinateGeocoder coordinateGeocoder;
         private readonly ITimeTrackerWorkspace timeTrackerWorkspace;
         private TrackLocation currentTrackLocation;
 
-        public CoreCoreApplicationContext(ICoordinateGeocoder coordinateGeocoder, ITimeTrackerWorkspace timeTrackerWorkspace)
+        public CoreApplicationContext(ICoordinateGeocoder coordinateGeocoder, ITimeTrackerWorkspace timeTrackerWorkspace)
         {
             this.coordinateGeocoder = coordinateGeocoder;
             this.timeTrackerWorkspace = timeTrackerWorkspace;
@@ -45,14 +45,29 @@ namespace TimeTracker.Core.Domain
 
         private void WriteEnterPerimeterEvent(TrackLocation enterTrackLocation)
         {
+            if (enterTrackLocation == null)
+            {
+                return;
+            }
+
             Log.Debug(this.GetType().Name, "Enter Perimeter");
-            this.timeTrackerWorkspace.SaveTrackLocationLogEntry(new TrackLocationLogEntry { EnterTime = DateTime.Now, TrackLocationId = enterTrackLocation.ID });
+            var entry = new TrackLocationLogEntry { LogEntry = Constants.EntryPerimeter, TrackLocationId = enterTrackLocation.ID, LocationName = enterTrackLocation.LocationName };
+            entry.LogDateTime = (DateTime.Now);
+            int response = this.timeTrackerWorkspace.SaveTrackLocationLogEntry(entry);
+            Log.Error(this.GetType().Name, "Enter Perimeter response" + response);
         }
 
         private void WriteExitPerimeterEvent(TrackLocation exitTrackLocation)
         {
+            if (exitTrackLocation == null)
+            {
+                return;
+            }
+
             Log.Debug(this.GetType().Name, "Exit Perimeter");
-            this.timeTrackerWorkspace.SaveTrackLocationLogEntry(new TrackLocationLogEntry { ExitTime = DateTime.Now, TrackLocationId = exitTrackLocation.ID });
+            var entry = new TrackLocationLogEntry { LogEntry = Constants.ExitPerimeter, TrackLocationId = exitTrackLocation.ID, LocationName = exitTrackLocation.LocationName };
+            entry.LogDateTime = (DateTime.Now);
+            int response = this.timeTrackerWorkspace.SaveTrackLocationLogEntry(entry);
         }
 
         /// <summary>

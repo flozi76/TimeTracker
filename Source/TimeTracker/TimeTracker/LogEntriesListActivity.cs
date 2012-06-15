@@ -15,11 +15,13 @@ namespace TimeTracker
     using Android.Util;
     using TimeTracker.Adapters;
     using TimeTracker.Core.Domain;
+    using TimeTracker.Core.Domain.Entities;
 
     [Activity(Label = "My Activity")]
     public class LogEntriesListActivity : Activity
     {
         private ListView listViewLogEntries;
+        private ITimeTrackerWorkspace timeTrackerWorkspace;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -31,7 +33,12 @@ namespace TimeTracker
 
             try
             {
-                var trackLocations = CentralStation.Instance.Ainject.ResolveType<ITimeTrackerWorkspace>().GetTrackLocationLogEntries().ToList();
+                this.timeTrackerWorkspace = CentralStation.Instance.Ainject.ResolveType<ITimeTrackerWorkspace>();
+                ////var entry = new TrackLocationLogEntry { LogEntry = Constants.EntryPerimeter, TrackLocationId = 1 };
+                ////entry.SetLogDateTime(DateTime.Now);
+                ////int response = this.timeTrackerWorkspace.SaveTrackLocationLogEntry(entry);
+
+                var trackLocations = this.timeTrackerWorkspace.GetTrackLocationLogEntries().ToList();
                 this.listViewLogEntries.Adapter = new TrackLocationLogEntryListAdapter(this, trackLocations);
                 this.listViewLogEntries.TextFilterEnabled = true;
 

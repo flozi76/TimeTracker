@@ -2,8 +2,6 @@ using System;
 
 namespace TimeTracker.Core.Domain.Entities
 {
-    using TimeTracker.Core.Database.SQLite;
-
     public class TrackLocationLogEntry : Entity
     {
         /// <summary>
@@ -16,12 +14,33 @@ namespace TimeTracker.Core.Domain.Entities
         /// Gets or sets the enter time.
         /// </summary>
         /// <value>The enter time.</value>
-        public DateTime EnterTime { get; set; }
+        public DateTime LogDateTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the exit time.
+        /// Gets or sets the log entry.
         /// </summary>
-        /// <value>The exit time.</value>
-        public DateTime ExitTime { get; set; }
+        /// <value>The log entry.</value>
+        public string LogEntry { get; set; }
+
+        public string LocationName { get; set; }
+
+        ///// <summary>
+        ///// Sets the log date time.
+        ///// </summary>
+        ///// <param name="logDateTime">The log date time.</param>
+        //public void SetLogDateTime(DateTime logDateTime)
+        //{
+        //    this.LogDateTime = logDateTime.ToLongDateString();
+        //}
+
+        ///// <summary>
+        ///// Gets the date time.
+        ///// </summary>
+        ///// <returns></returns>
+        //public DateTime GetDateTime()
+        //{
+
+        //    return DateTime.Parse(this.LogDateTime);
+        //}
     }
 }

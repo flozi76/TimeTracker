@@ -17,5 +17,7 @@ namespace TimeTracker.Core.Domain
         public const double PerimeterDistance = 30;
         public const double MilesToKilometers = 1.609344;
         public const double MilesToNautical = 0.8684;
+        public const string EntryPerimeter = "EntryPerimeter";
+        public const string ExitPerimeter = "ExitPerimeter";
     }
 }

@@ -10,4 +10,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewLocationItem" />
+    <AutoCompleteTextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompleteTextLocationName" />
 </LinearLayout>

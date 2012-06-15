@@ -23,6 +23,7 @@ namespace TimeTracker
         private ISelectLocationViewModel viewModel;
         private ListView listView;
         private ICoreApplicationContext coreApplicationContext;
+        private AutoCompleteTextView autoCompleteTextView;
 
         protected override void OnCreate(Android.OS.Bundle savedInstanceState)
         {
@@ -32,6 +33,7 @@ namespace TimeTracker
             var locationManager = (LocationManager)this.GetSystemService(LocationService);
             var geoCoder = new Geocoder(this);
             this.listView = this.FindViewById<ListView>(Resource.Id.listViewSelectLocations);
+            this.autoCompleteTextView = this.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextLocationName);
 
             try
             {
@@ -49,6 +51,7 @@ namespace TimeTracker
                     var backToMain = new Intent(this, typeof(MainActivity));
                     //backToMain.PutExtra("TaskID", this._tasks[e.Position].ID);
                     var item = currentLocations[e.Position];
+                    item.LocationName = this.autoCompleteTextView.Text;
 
                     CentralStation.Instance.Ainject.ResolveType<ITimeTrackerWorkspace>().SaveTrackLocation(item);
 
