@@ -33,7 +33,6 @@ namespace TimeTracker
             var locationManager = (LocationManager)this.GetSystemService(LocationService);
             var geoCoder = new Geocoder(this);
             this.listView = this.FindViewById<ListView>(Resource.Id.listViewSelectLocations);
-            this.autoCompleteTextView = this.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextLocationName);
 
             try
             {
@@ -44,16 +43,14 @@ namespace TimeTracker
                 IList<TrackLocation> currentLocations = this.viewModel.ResolveCurrentLocations(geoCoder);
 
                 this.listView.Adapter = new TrackLocationListAdapter(this, currentLocations);
-                this.listView.TextFilterEnabled = true;
+                //this.listView.TextFilterEnabled = true;
 
                 this.listView.ItemClick += (sender, e) =>
                 {
-                    var backToMain = new Intent(this, typeof(MainActivity));
-                    //backToMain.PutExtra("TaskID", this._tasks[e.Position].ID);
+                    var backToMain = new Intent(this, typeof(CompleteLocationInput));
                     var item = currentLocations[e.Position];
-                    item.LocationName = this.autoCompleteTextView.Text;
-
                     CentralStation.Instance.Ainject.ResolveType<ITimeTrackerWorkspace>().SaveTrackLocation(item);
+                    backToMain.PutExtra("LocationId", item.ID);
 
                     this.StartActivity(backToMain);
                 };

@@ -93,10 +93,16 @@ namespace TimeTracker.Core.Domain
         {
             var locations = this.GetTrackLocations();
 
-            return (from trackLocation in locations
-                    let distance = this.distanceCalculator.Distance(coordinate, trackLocation.ToCoordinate(), UnitsOfLength.Meter)
-                    where distance < Constants.PerimeterDistance
-                    select trackLocation).FirstOrDefault();
+            foreach (var trackLocation in locations)
+            {
+                var distance = this.distanceCalculator.Distance(coordinate, trackLocation.ToCoordinate(), UnitsOfLength.Meter);
+                if (distance < Constants.PerimeterDistance)
+                {
+                    return trackLocation;
+                }
+            }
+
+            return null;
         }
     }
 }

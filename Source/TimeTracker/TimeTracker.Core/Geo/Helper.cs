@@ -77,6 +77,11 @@ namespace TimeTracker.Core.Geo
         /// <returns>Coordinates for the location</returns>
         public static Coordinate ToCoordinate(this Location location)
         {
+            if (location == null)
+            {
+                return null;
+            }
+
             return new Coordinate { Longitude = location.Longitude, Latitude = location.Latitude };
         }
 

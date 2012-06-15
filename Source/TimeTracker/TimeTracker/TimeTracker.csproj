@@ -50,6 +50,7 @@
     <Compile Include="Adapters\TrackLocationLogEntryListAdapter.cs" />
     <Compile Include="Adapters\TrackLocationListAdapter.cs" />
     <Compile Include="CentralStation.cs" />
+    <Compile Include="CompleteLocationInput.cs" />
     <Compile Include="LogEntriesListActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="RegisterLocationManagerHelper.cs" />
@@ -74,6 +75,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\LogEntriesList.axml" />
+    <AndroidResource Include="Resources\Layout\CompleteLocationInputForm.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml" />

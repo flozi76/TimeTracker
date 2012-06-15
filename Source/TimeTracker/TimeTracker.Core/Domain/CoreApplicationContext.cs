@@ -77,7 +77,14 @@ namespace TimeTracker.Core.Domain
         /// <returns></returns>
         public IList<TrackLocation> GetListOfCurrentTrackLocationsToAdd(Geocoder geocoder)
         {
-            return this.coordinateGeocoder.GenerateListOfTrackLocations(this.CurrentLocation, geocoder);
+            IList<TrackLocation> returnList = new List<TrackLocation>();
+
+            if (this.CurrentLocation != null)
+            {
+                returnList = this.coordinateGeocoder.GenerateListOfTrackLocations(this.CurrentLocation, geocoder);
+            }
+
+            return returnList;
         }
     }
 }

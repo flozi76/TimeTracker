@@ -17,7 +17,7 @@ namespace TimeTracker
     using TimeTracker.Core.Domain;
     using TimeTracker.Core.Domain.Entities;
 
-    [Activity(Label = "My Activity")]
+    [Activity(Label = "Log perimeter activities")]
     public class LogEntriesListActivity : Activity
     {
         private ListView listViewLogEntries;
